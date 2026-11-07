@@ -51,6 +51,20 @@ h1, h2, h3, .font-display {
   }
 }
 
+@keyframes desk-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-desk {
+  animation: desk-scroll 46s linear infinite;
+}
+
+.animate-desk:hover {
+  animation-play-state: paused;
+}
+
 .animate-wheel {
   animation: wheel-spin 34s linear infinite;
 }
@@ -65,8 +79,13 @@ h1, h2, h3, .font-display {
 
 @media (prefers-reduced-motion: reduce) {
   .animate-wheel,
+  .animate-desk,
   .animate-step-pulse,
   .animate-step-in {
     animation: none;
+  }
+
+  .desk-viewport {
+    overflow-x: auto;
   }
 }

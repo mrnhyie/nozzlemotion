@@ -111,6 +111,49 @@ const PROJECTS = [
 
 const BOARD_SIZES = ["Raspberry Pi 4 / 5", "Pi Pico 2", "ESP32 dev kits", "Arduino Uno / Mega", "Sense HAT", "18650 packs", "Generic perfboard"];
 
+const DESK = [
+  {
+    src: "/images/d-pen-holder.jpg",
+    alt: "Double-helix pen holder with three coloured pens",
+    label: "Helix pen holder",
+    note: "Free model on MakerWorld — we print it in one run",
+    href: "https://makerworld.com/en/models/1286288-dna-double-helix-pen-holder",
+    source: "MakerWorld",
+  },
+  {
+    src: "/images/d-vases.jpg",
+    alt: "Stacked ribbed vases in bright colours on a pine shelf",
+    label: "Ribbed vase set",
+    note: "Single-wall spiral vase mode, any colour you want",
+  },
+  {
+    src: "/images/d-bfriends.jpg",
+    alt: "Matching desk organisers in orange, sage and maroon",
+    label: "bFriends desk set",
+    note: "Pearson Lloyd for Bene, 2021 — design reference",
+    href: "https://www.dezeen.com/2021-12-01/pearson-lloyd-bfriends-bene-3d-printed-desk-accessories-recycled-bioplastic/",
+    source: "Dezeen",
+  },
+  {
+    src: "/images/d-tooth.jpg",
+    alt: "Smiling tooth-shaped toothbrush holder on a bathroom shelf",
+    label: "Toothbrush caddy",
+    note: "Four holes, drainage slots cut in the base",
+  },
+  {
+    src: "/images/d-accessories.jpg",
+    alt: "Pencil pot, card stand and small chair-shaped holder on a desk",
+    label: "Desk caddy set",
+    note: "Prints upright, no assembly",
+  },
+  {
+    src: "/images/d-phone-stand.jpg",
+    alt: "Black phone stand with an organic lattice body",
+    label: "Lattice phone stand",
+    note: "Thin walls — we would quote this one carefully",
+  },
+];
+
 export default function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -259,6 +302,56 @@ export default function LandingPage() {
             <Image src="/images/g-parts.jpg" alt="Orange printed parts fresh off the bed" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
           </div>
         </div>
+      </section>
+
+      {/* Desk accessories — scrolling reference strip */}
+      <section id="desk" className="border-b border-line bg-white py-20">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-end justify-between gap-4 px-4 sm:px-6">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-ink-soft">Design references · not our prints</p>
+            <h2 className="font-display mt-3 max-w-xl text-3xl font-bold sm:text-4xl">Desk things people bring us</h2>
+          </div>
+          <Link href="/signup" className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white hover:bg-black">
+            Send us the model
+          </Link>
+        </div>
+
+        <div className="desk-viewport mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+          <div className="animate-desk flex w-max gap-4 pr-4">
+            {[...DESK, ...DESK].map((d, i) => (
+              <figure
+                key={`${d.src}-${i}`}
+                aria-hidden={i >= DESK.length}
+                className="group relative h-[340px] w-[236px] shrink-0 overflow-hidden rounded-[22px] border border-line bg-mist"
+              >
+                <Image
+                  src={d.src}
+                  alt={d.alt}
+                  fill
+                  sizes="236px"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/90 via-ink/60 to-transparent p-4 pt-12 opacity-100 translate-y-0 transition duration-300 sm:translate-y-5 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
+                  <p className="font-display text-sm font-bold text-white">{d.label}</p>
+                  <p className="mt-1 text-xs leading-5 text-white/75">{d.note}</p>
+                  {d.href && (
+                    <a
+                      href={d.href}
+                      tabIndex={i >= DESK.length ? -1 : 0}
+                      className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.14em] text-brand hover:underline"
+                    >
+                      {d.source} ↗
+                    </a>
+                  )}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        <p className="mx-auto mt-8 max-w-7xl px-4 text-xs leading-6 text-ink-soft sm:px-6">
+          These photographs belong to the makers and studios who shot them. They are here as build ideas, not as jobs we have printed — send your own model and we quote against it.
+        </p>
       </section>
 
       {/* Material wheel */}
